@@ -1,0 +1,1569 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+  overflow: hidden;
+}
+
+body *:not(.blur-exclude):not(.blur-exclude *) {
+  transition: 0.1s -webkit-filter linear;
+}
+
+input,
+button {
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+}
+
+#group-create-container,
+#member-list-container,
+#tag-set-container,
+#leave-container,
+#unfriend-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  display: none;
+}
+
+#group-create-container *:not(label),
+#member-list-container *,
+#tag-set-container *:not(label),
+#leave-container *:not(label),
+#unfriend-container *:not(label) {
+  z-index: 5;
+}
+
+#group-create-container.overlay::after,
+#member-list-container.overlay::after,
+#tag-set-container.overlay::after,
+#leave-container.overlay::after,
+#unfriend-container.overlay::after {
+  opacity: 0.4;
+  background: black;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#leave-container #leave-info-container {
+  width: 100%;
+}
+
+#unfriend-container #unfriend-info-container {
+  width: 100%;
+}
+
+#unfriend-container #unfriend-name::before {
+  content: 'Do you definitely want unfriend ';
+}
+
+#unfriend-container #unfriend-name::after {
+  content: '?';
+}
+
+#unfriend-container #unfriend-type-select {
+  margin-bottom: 50px;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 15px;
+}
+
+.popup-container {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 35%;
+  padding: 100px;
+  background: white;
+  border-radius: 15px;
+  -webkit-box-shadow: 10px 10px 32px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 32px 0px rgba(0, 0, 0, 0.75);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+  flex-flow: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.popup-container p,
+.popup-container form {
+  margin-top: 50px;
+}
+
+.popup-container .input-field-container {
+  height: 50px;
+  position: relative;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.popup-container .input-submit-container {
+  width: 100%;
+  height: 50px;
+}
+
+.popup-container input[type="submit"] {
+  border-radius: 10px;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  background: #6dd5ed;
+  /* Correct text display bug with scaling */
+  -webkit-font-smoothing: antialiased;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.popup-container input[type="submit"]:hover {
+  background: #8ffd9f;
+  -webkit-transform: translate3d(0, 0, 0) scale(1.03);
+  transform: translate3d(0, 0, 0) scale(1.03);
+}
+
+.popup-container input:not([type="submit"], [type="color"], [type="select"]) {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  left: -20px;
+  background: transparent;
+  padding: 20px;
+  border: 1px solid #ccc;
+  -webkit-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  height: 100%;
+}
+
+.popup-container .popup-close-button,
+#chat-container #pinned-message-container #pinned-message-delete-button {
+  font-weight: 100;
+  line-height: 0.65;
+  font-size: 3.5em;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.group-leave-button, .unfriend-button {
+  font-weight: 100;
+  line-height: 0.65;
+  font-size: 2em;
+  z-index: 10;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  -webkit-transition: all 0.2s ease-in-out !important;
+  -o-transition: all 0.2s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.popup-container .popup-close-button:after,
+#chat-container #pinned-message-container #pinned-message-delete-button:after,
+.group-leave-button:after, .unfriend-button:after {
+  content: "\00d7";
+  /* Cross */
+}
+
+.popup-container .popup-close-button:hover,
+#chat-container #pinned-message-container #pinned-message-delete-button:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.group-leave-button:hover, .unfriend-button:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+#server-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 15%;
+  border-right: solid 1px black;
+  -webkit-box-shadow: 2px 0 5px -2px black;
+  box-shadow: 2px 0 5px -2px black;
+}
+
+#server-container #group-prompt-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+#server-container #group-prompt {
+  font-weight: 200;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 10px;
+  font-size: 1.5em;
+}
+
+#server-container #server-selector {
+  display: inline-block;
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  /* Only show the scroll bar when necessary */
+}
+
+#server-container #chat-type-toggle-container, #options #message-type-toggle-container {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.toggle-box {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 49px;
+  position: relative;
+}
+
+#server-container #chat-type-toggle-container #chat-type-toggle, #options #message-type-toggle-container #message-type-toggle {
+  width: 0;
+  height: 0;
+  visibility: none;
+}
+
+/* SOURCE: https://www.w3schools.com/howto/howto_css_switch.asp [Accessed 08/02/2021] */
+#server-container #chat-type-toggle-container #chat-type-toggle-slider-visual, #options #message-type-toggle-container #message-type-toggle-slider-visual {
+  position: relative;
+  -webkit-transition: background 0.3s linear;
+  -o-transition: background 0.3s linear;
+  transition: background 0.3s linear;
+  background: #62cbe4;
+  cursor: pointer;
+  width: 30%;
+  height: 36px;
+  border-radius: 18px;
+  /* Half the height, so the ends are semi-circular. */
+}
+
+/* The white circle that we will slide. */
+#server-container #chat-type-toggle-container #chat-type-toggle-slider-visual::after, #options #message-type-toggle-container #message-type-toggle-slider-visual::after {
+  content: "";
+  position: absolute;
+  -webkit-transition: left 0.2s ease-in-out;
+  -o-transition: left 0.2s ease-in-out;
+  transition: left 0.2s ease-in-out;
+  background: white;
+  display: block;
+  height: 24px;
+  width: 24px;
+  top: 6px;
+  /* To center: half of the difference between my height and the container's. */
+  left: 6px;
+  border-radius: 50%;
+  /* Half of the width and height, to get a circle. */
+}
+
+#chat-type-toggle:checked+#chat-type-toggle-slider-visual {
+  background: #62f577 !important;
+  /* Override the unchecked colour. */
+}
+
+#chat-type-toggle:checked+#chat-type-toggle-slider-visual::after, #message-type-toggle:checked+#message-type-toggle-slider-visual::after {
+  left: calc(100% - (24px + 6px)) !important;
+  /* 24px is our width, 6px is the desired right so that it matches the initial left. */
+}
+
+/* END SOURCE */
+#server-container #friend-requests-container #friend-requests-toggle {
+  background: none;
+  outline: none;
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: black;
+  height: 50px;
+  width: 100%;
+  display: none;
+  cursor: pointer;
+  position: relative;
+}
+
+#server-container #friend-requests-container #friend-requests-toggle #alert {
+  display: none;
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  margin-left: -15px;
+  padding-left: 15px;
+  margin-top: -2px;
+  right: 0;
+  bottom: 8px;
+}
+
+#server-container #friend-requests-container #friend-requests-toggle:hover {
+  background: #eee;
+}
+
+#server-container #friend-requests-container #friend-requests-toggle img.expanded:first-child {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  /* Rotate so the arrow is pointing down. */
+}
+
+#server-container #friend-requests-container .slide-back {
+  display: none !important;
+}
+
+#server-container #friend-requests-container .slide-back.expanded {
+  display: block !important;
+}
+
+#server-container #friend-requests-container #friend-requests div {
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 10px 0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#server-container #friend-requests-container #friend-requests div:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+#server-container #friend-requests-container #friend-requests p {
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 10px;
+  overflow-wrap: break-word;
+  width: calc(100% - 78px);
+}
+
+#server-container #friend-requests-container #friend-requests p.no-buttons {
+  width: 100%;
+}
+
+#server-container #friend-requests-container #friend-requests div:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+#server-container #friend-requests-container #friend-requests .friend-button-container {
+  height: 39px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+#server-container #friend-requests-container #friend-requests div button {
+  cursor: pointer;
+  height: 39px;
+  background: transparent;
+  border: none;
+  outline: none;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+#server-container #friend-requests-container #friend-requests div button:hover {
+  background: rgba(0, 0, 0, 0.07);
+  /* We set the hover with opacity so as not to affect the drop shadow in the "inset" effect from the slide-back. */
+}
+
+#server-container #friend-requests-container #friend-requests div button img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#server-container #server-buttons-container {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#server-container #server-buttons-container .group-action-button {
+  font-weight: bolder;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  border: 0;
+  height: 50px;
+  width: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  -webkit-transition: background 0.2s linear;
+  -o-transition: background 0.2s linear;
+  transition: background 0.2s linear;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#server-container #server-buttons-container .group-action-button:first-child {
+  border-right: 1px solid #888;
+}
+
+#server-container #server-buttons-container .group-action-button:not(.active-button):hover {
+  background: #eee;
+}
+
+#server-container #group-join-form {
+  display: none;
+}
+
+#server-container #group-join-form .input-field-container {
+  margin: 3px 0 3px 3px;
+  display: inline-block;
+  height: 50px;
+  width: 70%;
+}
+
+#server-container #group-join-form .slide-back,
+#server-container #friend-requests-container .slide-back:not(:empty) {
+  border-bottom: 1px solid black;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: inset 0 0 5px #888;
+  box-shadow: inset 0 0 5px #888;
+  background: #f0f0f0;
+  position: relative;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#server-container #group-join-form #group-join-code {
+  color: black;
+  display: inline-block;
+  background: transparent;
+  padding: 5px;
+  padding-left: 5px;
+  padding-bottom: 0;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  outline: none;
+  border: none;
+  width: calc(100% - 10px);
+  border-bottom: 1px solid #888;
+  height: calc(100% - 5px);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#server-container #group-join-form #group-join-button {
+  height: 35px;
+  font-weight: bolder;
+  border: 1px solid black;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: transparent;
+  outline: none;
+  margin-right: 5px;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+  width: calc(30% - 14px);
+  cursor: pointer;
+}
+
+#server-container #group-join-form #group-join-button:hover,
+#options-nav-container #invite-code-display #invite-code-copy:hover {
+  background: #8ffd9f;
+}
+
+#server-selector .server-button,
+#server-selector .friend-button {
+  overflow: hidden;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  height: 100px;
+  position: relative;
+  left: 0;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: solid 1px #555;
+  display: block;
+}
+
+#server-selector .server-button .tag-set-button,
+#server-selector .server-button .group-leave-button,
+.unfriend-button {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  background: none;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+#server-selector .server-button .group-leave-button, .unfriend-button {
+  top: 3px;
+}
+
+#server-selector .server-button .tag-set-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#server-selector .server-button .tag-set-button .tag-image {
+  height: 100%;
+  width: 100%;
+}
+
+#tags-search {
+  border: none;
+  outline: none;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  height: 51px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#tag-set-container #tag-set-title::before {
+  content: "Set Tag for ";
+}
+
+.friend-add-button:disabled {
+  color: black !important;
+}
+
+#server-selector .server-button:not(.active-button):hover,
+#server-selector .friend-button:not(.active-button):hover {
+  background: #eee;
+}
+
+.active-button {
+  background: #6dd5ed !important;
+}
+
+.active-button * {
+  color: black !important;
+}
+
+#server-selector .server-button .server-info-container *,
+#server-selector .friend-button .friend-info-container * {
+  padding: 0 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  color: #888;
+  font-size: 1em;
+  position: relative;
+}
+
+#server-selector .server-button .server-info-container h1,
+#server-selector .friend-button .friend-info-container h1 {
+  color: #555;
+  font-size: 1.5em;
+}
+
+#chat-container {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  height: calc(100% - 50px);
+  width: 85%;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+#chat-container #pinned-message-container {
+  display: none;
+  width: 100%;
+  min-height: 100px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  font-size: 1.1em;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+
+#chat-container #pinned-message-container #pinned-message-delete-button {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+#chat-container #pinned-message-container #pinned-message-label {
+  font-weight: bolder;
+  color: #555;
+}
+
+#chat-container #pinned-message-container #pinned-message {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  max-width: calc(100% - 40px);
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+#chat-container #pinned-message-container #pinned-message {
+  cursor: pointer;
+}
+
+#chat-container #pinned-message-container #pinned-message-text::before {
+  content: open-quote;
+}
+
+#chat-container #pinned-message-container #pinned-message-text::after {
+  content: close-quote;
+}
+
+#chat-container #chatbox {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-bottom: 0;
+  overflow-y: auto;
+  /* Only show the scroll bar when necessary */
+  list-style-type: none;
+  margin-bottom: 50px;
+  /* Prevent overflow into the message box field */
+}
+
+#chat-container #chatbox li {
+  margin-bottom: 20px;
+  /* Space long, wrapped message lines differently to brand new messages */
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#chat-container #chatbox li .message-options-container button {
+  display: none;
+}
+
+#chat-container #chatbox li.owned:hover .message-options-container .message-bin-button {
+  display: inline-block !important;
+}
+
+#chat-container #chatbox li.pinned {
+  background: #93d9db !important;
+}
+
+#chat-container #chatbox li:first-child {
+  margin-top: 10px;
+  /* Ensure the contextual message option buttons are fully displayed and not chopped because of this being the first message. */
+}
+
+#chat-container #chatbox li:hover {
+  background: #f5f5f5;
+}
+
+#chat-container #chatbox li .message-timestamp {
+  padding-right: inherit;
+}
+
+#chat-container #chatbox li .message-options-container {
+  display: none;
+  float: right;
+  height: 30px;
+  margin-top: -20px;
+  margin-right: 10px;
+  border-radius: 7px;
+  background: white;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+#chat-container #chatbox li:hover .message-options-container {
+  display: block;
+}
+
+#chat-container #chatbox li.pinned .message-pin-button {
+  display: none;
+}
+
+#chat-container #chatbox li.pinned .message-bin-button {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#chat-container #chatbox li .message-options-container button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 5px;
+  background: none;
+  height: 100%;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+#chat-container #chatbox li .message-options-container button img {
+  height: 100%;
+}
+
+#chat-container #chatbox li .message-options-container button:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#chat-container #chatbox li .message-options-container button:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+#chat-container #chatbox li .message-options-container button:not(:last-child) {
+  border-right: 1px solid black;
+}
+
+#chat-container #chatbox li .message-options-container button:hover {
+  background: #ddd;
+}
+
+#chat-container .input-field-container {
+  border: solid 1px black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#chat-container #message {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  height: 100%;
+  padding: 5px 15px;
+}
+
+#chat-container label[for="file-input"]::before {
+  content: "+";
+}
+
+#chat-container label[for="file-input"] {
+  float: right;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 50px;
+  padding: 0;
+  margin-right: 55px;
+  width: 50px;
+  display: inline-block;
+  color: #777;
+  text-align: center;
+  line-height: 50px;
+  font-size: 50px;
+  cursor: pointer;
+  -webkit-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  /* Correct text display bug with scaling */
+  -webkit-font-smoothing: antialiased;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+#chat-container label[for="file-input"]~#file-info {
+  float: right;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 50px;
+  width: auto;
+  top: 0;
+  padding: 0;
+  line-height: 50px;
+  font-size: 40px;
+}
+
+#chat-container label[for="file-input"]~#file-info>#file-chosen {
+  font-size: 15px;
+  display: inline-block;
+  line-height: 50px;
+  height: 50px;
+  margin-top: -25px;
+  position: relative;
+  top: -9px;
+}
+
+#chat-container label[for="file-input"]~#file-info>#file-chosen span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#chat-container label[for="file-input"]~#file-info>#file-chosen span.name {
+  margin-right: -5px;
+  max-width: 16vw;
+  /* 20% of the message box width. */
+  overflow: hidden;
+  vertical-align: bottom;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+#chat-container label[for="file-input"]~#file-info>#remove-file-button {
+  height: 100%;
+  display: none;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #777;
+}
+
+#chat-container label[for="file-input"]~#file-info>#remove-file-button:hover {
+  color: #333;
+}
+
+#chat-container label[for="file-input"]~#file-info>#remove-file-button::before {
+  content: "\00d7";
+}
+
+#chat-container label[for="file-input"]:hover {
+  color: #6dd5ed;
+  -webkit-transform: translate3d(0, 0, 0) scale(1.03);
+  transform: translate3d(0, 0, 0) scale(1.03);
+}
+
+#chat-container #file-input.has-file~label[for="file-input"] {
+  color: #8ffd9f !important;
+}
+
+#chat-container #chatbox-reminder {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, calc(-50% - 25px));
+  -ms-transform: translate(-50%, calc(-50% - 25px));
+  transform: translate(-50%, calc(-50% - 25px));
+  /* Manually adjust to fit in the center of the visible window, some of which is blocked by the message input field. */
+  font-size: 2.3em;
+  font-weight: lighter;
+  text-align: center;
+}
+
+#chat-container #invite-prompt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, calc(-50% - 25px + 2.3em));
+  -ms-transform: translate(-50%, calc(-50% - 25px + 2.3em));
+  transform: translate(-50%, calc(-50% - 25px + 2.3em));
+  font-weight: 200;
+  display: none;
+  text-align: center;
+}
+
+#message-form {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+#message-form .input-field-container {
+  height: 50px;
+}
+
+#message-form #message-send-tick * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#message-form #message-send-tick {
+  position: absolute;
+  right: 0;
+  height: 50px;
+  padding: 7px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+#message-form #message-send-tick img {
+  opacity: 0.9;
+  -webkit-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+#message-form #message-send-tick img:hover {
+  opacity: 1;
+}
+
+#message-form #message-send-tick img {
+  opacity: 0.5;
+  height: 100%;
+}
+
+/* SOURCE: https://codepen.io/Takumari85/pen/RaYwpJ [Accessed 27/10/2020] */
+.effect-20~.focus-border:before,
+.effect-20~.focus-border:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3399ff;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.effect-20~.focus-border:after {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 0;
+}
+
+.effect-20~.focus-border i:before,
+.effect-20~.focus-border i:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background-color: #3399ff;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.effect-20~.focus-border i:after {
+  left: auto;
+  right: 0;
+  top: auto;
+  bottom: 0;
+}
+
+.effect-20:focus~.focus-border:before,
+.effect-20:focus~.focus-border:after,
+.non-empty.effect-20~.focus-border:before,
+.non-empty.effect-20~.focus-border:after {
+  width: 100%;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.effect-20:focus~.focus-border i:before,
+.effect-20:focus~.focus-border i:after,
+.non-empty.effect-20~.focus-border i:before,
+.non-empty.effect-20~.focus-border i:after {
+  height: 100%;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.effect-20~label {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: left;
+  position: absolute;
+  left: 20px;
+  width: 100%;
+  top: 50%;
+  color: #aaa;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 0.5px;
+}
+
+.effect-20:focus~label,
+.non-empty.effect-20~label {
+  top: -18px;
+  left: 0;
+  font-size: 12px;
+  color: #3399ff;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* END SOURCE */
+#chat-container #message :focus {
+  -webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
+.requires-group-selection {
+  display: none;
+  /* These elements will only be shown when the user has selected a group. */
+}
+
+#info-container {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 50px;
+  width: 85%;
+  position: absolute;
+  top: 0;
+  left: 15%;
+  border-left: solid 1px black;
+  border-bottom: solid 1px black;
+  background: #2193b0;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -o-linear-gradient(left, #6dd5ed, #2193b0);
+  background: -webkit-gradient(linear, left top, right top, from(#6dd5ed), to(#2193b0));
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Correct particles.js Canvas Positioning */
+#info-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#info-container .title {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 10px;
+  float: left;
+}
+
+#info-container #server-name-display {
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  max-width: 50%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  padding-top: 6px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#info-container #server-name-display:before {
+  content: attr(data-before);
+}
+
+#info-container #name-display {
+  float: right;
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+#info-container #name-display:before {
+  content: "Welcome, ";
+  white-space: pre;
+}
+
+#info-container #name-display:after {
+  content: ".";
+}
+
+#info-container #info-buttons-container {
+  float: right;
+  height: 50px;
+}
+
+#info-container #info-buttons-container * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  z-index: 1;
+  /* Ensure cursor displays correctly */
+}
+
+#info-container #info-buttons-container button {
+  opacity: 0.7;
+  position: relative;
+  right: 0;
+  height: 50px;
+  padding: 7px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  -webkit-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+#info-container #info-buttons-container button:last-child {
+  padding-left: 0 !important;
+}
+
+#info-container #info-buttons-container #profile-options-button:hover,
+#info-container #info-buttons-container #options-button:hover {
+  opacity: 1;
+}
+
+#options.friends li {
+  display: none !important;
+}
+
+#options.friends li:first-child,
+#options.friends li:nth-child(2) {
+  display: block !important;
+}
+
+#options.friends li:nth-child(2) {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#info-container #info-buttons-container img {
+  height: 100%;
+  width: auto;
+}
+
+.options-box {
+  border: 1px solid black;
+  position: absolute;
+  max-width: 30%;
+  display: inline-block;
+  margin-top: 63px;
+  right: 0;
+  border-radius: 10px;
+  margin-right: 10px;
+  z-index: 2;
+  visibility: hidden;
+  /* Hidden by default and visible when the user clicks on the corresponding button. */
+}
+
+.trim-inputted {
+  max-width: 100%;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.options-box #profile-options-name-label, .options-box #group-options-label {
+  text-align: center;
+}
+
+.options-box #group-options-label {
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.options-box .arrow-up {
+  position: absolute;
+  top: -14px;
+  /* Such as to position the arrow atop the box with no gap. */
+  width: 0;
+  border-width: 0 8px 14px 8px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+#options-nav-container .arrow-up {
+  right: 54px;
+}
+
+#profile-options-nav-container .arrow-up {
+  right: 6px;
+}
+
+#options-nav-container #invite-code-container {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#options-nav-container #invite-code-container * {
+  float: left;
+}
+
+#options-nav-container #invite-code-display {
+  -webkit-box-shadow: inset 0 0 5px #888;
+  box-shadow: inset 0 0 5px #888;
+  display: none;
+  padding: 0;
+}
+
+#options-nav-container #invite-code-display #invite-code-copy {
+  height: 30px;
+  margin-left: 10px;
+  padding: 2px;
+  font-weight: bolder;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background: 0 0;
+  cursor: pointer;
+  outline: 0;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+#options-nav-container #search {
+  outline: none;
+  border: none;
+}
+
+.options-box li {
+  list-style-type: none;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 10px;
+  z-index: 3;
+}
+
+.options-box li:first-child {
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: -10px;
+  padding-bottom: 20px;
+  background: #2193b0;
+  background: -o-linear-gradient(left, #6dd5ed, #2193b0);
+  background: -webkit-gradient(linear, left top, right top, from(#6dd5ed), to(#2193b0));
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+}
+
+#group-options-label::before {
+  content: "Options for ";
+}
+
+.options-box li.round-bottom {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.options-box li:not(:first-child) {
+  border-top: 1px solid #888;
+  background: #fff;
+}
+
+.options-box li:nth-child(2) {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.options-box li a {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  z-index: 4;
+}
+
+#member-list-container #member-list-popup {
+  max-height: 80%;
+  width: 70%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+
+#member-list-container #member-list-title::before {
+  content: "Members of ";
+}
+
+#member-list-container #members-scrollbox {
+  margin-top: 25px;
+  overflow-y: auto;
+  width: 80%;
+}
+
+#member-list-container #member-list li {
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+#member-list-container #member-list li:not(.title):hover {
+  background: #eee;
+}
+
+#member-list-container #member-list .member-section:not(:last-child),
+#member-list-container #member-list li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+#member-list-container #member-list li.title {
+  color: #444;
+  font-style: italic;
+  font-weight: 200;
+  font-size: 1.3em;
+}
+
+#member-list-container #member-list li:not(.title) {
+  margin-left: 10px;
+}
+
+#member-list-container #member-list ul:empty:before {
+  margin-left: 10px;
+  font-weight: bold;
+  content: "No one's here, yet!";
+}
+
+#member-list-container #member-list li .member-options-container {
+  display: none;
+  float: right;
+  height: 30px;
+  background: white;
+  margin-top: -38px;
+  border: thin solid black;
+  border-radius: 7px;
+}
+
+#member-list-container #member-list li:hover .member-options-container {
+  display: block;
+  overflow: hidden;
+}
+
+#member-list-container #member-list li .member-options-container button {
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: none;
+  height: 100%;
+  padding: 5px;
+  -webkit-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#member-list-container #member-list li .member-options-container button:first-child {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#member-list-container #member-list li .member-options-container button:last-child {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+#member-list-container #member-list li .member-options-container button:hover {
+  background: #ddd;
+}
+
+#member-list-container #member-list li .member-options-container:not(.single) button:not(:first-child) {
+  border-left: thin solid black;
+}
+
+.empty {
+  border: none !important;
+}
+
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  font-weight: bold;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  30% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  /* Negative, so moving upwards. */
+  50% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  /* Finish early and have some pause at end. */
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  30% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  /* Negative, so moving upwards. */
+  50% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  /* Finish early and have some pause at the end. */
+}

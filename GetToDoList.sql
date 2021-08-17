@@ -1,0 +1,1 @@
+SELECT * FROM Crosstalk.Message WHERE GroupID="1" ORDER BY Timestamp;

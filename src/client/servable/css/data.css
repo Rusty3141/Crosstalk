@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+  overflow: hidden;
+}
+
+input,
+button {
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+}
+
+#landing-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+  background: #2193b0;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -o-linear-gradient(left, #6dd5ed, #2193b0);
+  background: -webkit-gradient(linear, left top, right top, from(#6dd5ed), to(#2193b0));
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Correct particles.js Canvas Positioning */
+#landing-container>canvas {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+#data-container {
+  background: white;
+  margin: 100px;
+  border-radius: 30px;
+  padding: 50px;
+  z-index: 2;
+  position: relative;
+  height: calc(100% - 200px);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 10px 10px 32px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 32px 0px rgba(0, 0, 0, 0.75);
+}
+
+#data-container>.title {
+  position: relative;
+  font-weight: 200;
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 30px;
+  height: 50px;
+}
+
+#data-container>.title::before {
+  content: "Group Info for ";
+}
+
+#data-container #stats-container #numbers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  height: 80px;
+}
+
+#data-container #stats-container #numbers .title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#data-container #stats-container #numbers h2 {
+  color: #555;
+}
+
+#data-container #stats-container #numbers div {
+  width: 300px;
+  text-align: center;
+}
+
+#chart-container {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 50px 0;
+  width: 80%;
+  height: calc(100vh - 510px);
+}
+
+.trim-inputted {
+  max-width: 100%;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <meta name="apple-mobile-web-app-title" content="Crosstalk" />
+  <meta name="application-name" content="Crosstalk" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Work Sans Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="css/login.css" media="screen" />
+
+  <title>Register - Crosstalk</title>
+</head>
+
+<body>
+  <div id="landing-container">
+    <div id="login-section">
+      <div id="login-container">
+        <h1>Register</h1>
+        <form id="register-form" action="register-account" method="POST">
+          <p id="result" style="font-weight: bolder; margin: 25px 30px 0 30px; font-size: 1.1em;"></p>
+
+          <div class="input-field-container">
+            <input class="effect-20" type="text" name="display-name" placeholder="" maxlength="70" required autofocus />
+            <label>Display Name</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <div class="input-field-container">
+            <input class="effect-20" type="email" name="email" placeholder="" maxlength="70" required />
+            <label>Email</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <div class="input-field-container">
+            <input class="effect-20" type="email" name="confirm-email" placeholder="" required />
+            <label>Confirm Email</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <div class="input-field-container">
+            <input class="effect-20" type="password" name="password" placeholder="" autocomplete="new-password" required />
+            <label>Password</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <div class="input-field-container">
+            <input class="effect-20" type="password" name="confirm-password" placeholder="" autocomplete="new-password" required />
+            <label>Confirm Password</label>
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <div class="input-submit-container">
+            <input type="submit" name="register" value="Register" style="cursor: pointer;" required />
+            <a href="/">Already have an account? Log in.</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="info-container">
+      <div id="info-bar">
+        <img class="logo" src="img/Logo.png" alt="Logo" />
+        <h1 id="title">Crosstalk</h1>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <script src="particles/LoginParticlesLoader.js"></script>
+  <script src="js/empty-input.js"></script>
+  <script src="js/account-forms.js"></script>
+</body>
+
+</html>

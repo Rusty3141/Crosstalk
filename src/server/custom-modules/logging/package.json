@@ -1,0 +1,11 @@
+{
+  "name": "logging",
+  "version": "1.0.0",
+  "description": "Custom module for file and console logging in Crosstalk.",
+  "main": "logging.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Christopher",
+  "license": "UNLICENSED"
+}

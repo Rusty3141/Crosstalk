@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+}
+
+input {
+  font-size: 100%;
+  font-family: "Work Sans", sans-serif;
+}
+
+#landing-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#landing-container>div {
+  float: left;
+  height: 100%;
+  white-space: normal;
+  vertical-align: top;
+}
+
+#info-container {
+  float: left;
+  position: relative;
+  width: 60%;
+  background: #2193b0;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -o-linear-gradient(left, #6dd5ed, #2193b0);
+  background: -webkit-gradient(linear, left top, right top, from(#6dd5ed), to(#2193b0));
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/* Correct particles.js Canvas Positioning */
+#info-container canvas {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#info-container h1 {
+  position: relative;
+  font-size: 5.5vw;
+  color: white;
+  display: inline-block;
+}
+
+/* Blinking Cursor Effect */
+#info-container h1:after {
+  content: "";
+  height: 5vw;
+  -webkit-transform: translate(0.5vw, 0.5vw);
+  -ms-transform: translate(0.5vw, 0.5vw);
+  transform: translate(0.5vw, 0.5vw);
+  /* Adjust element positioning to fit better with text. */
+  width: 0.25vw;
+  background: white;
+  display: inline-block;
+  -webkit-animation: blink 1.2s linear infinite;
+}
+
+#info-container #info-bar {
+  position: relative;
+  text-align: center;
+  top: 50%;
+  height: 6vw;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+#info-container #info-bar .logo {
+  height: 6vw;
+  width: auto;
+}
+
+#login-section {
+  width: 40%;
+  /* background: #2d3045; */
+  background: white;
+}
+
+#login-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: black;
+  text-align: center;
+}
+
+#login-container :focus {
+  outline: none;
+}
+
+#login-container input {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 20px;
+  padding: 20px;
+}
+
+#login-container .input-field-container {
+  margin: 37px 0;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 65%;
+}
+
+#login-container .input-submit-container {
+  margin: 0;
+  position: relative;
+  width: 55%;
+  left: 45%;
+}
+
+#login-container input:not([type="submit"]) {
+  left: -20px;
+  background: transparent;
+  border: 1px solid #ccc;
+  -webkit-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  height: 100%;
+}
+
+/* SOURCE: https://codepen.io/Takumari85/pen/RaYwpJ [Accessed 27/10/2020] */
+.effect-20~.focus-border:before,
+.effect-20~.focus-border:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3399ff;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.effect-20~.focus-border:after {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 0;
+}
+
+.effect-20~.focus-border i:before,
+.effect-20~.focus-border i:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background-color: #3399ff;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.effect-20~.focus-border i:after {
+  left: auto;
+  right: 0;
+  top: auto;
+  bottom: 0;
+}
+
+.effect-20:focus~.focus-border:before,
+.effect-20:focus~.focus-border:after,
+.non-empty.effect-20~.focus-border:before,
+.non-empty.effect-20~.focus-border:after {
+  width: 100%;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.effect-20:focus~.focus-border i:before,
+.effect-20:focus~.focus-border i:after,
+.non-empty.effect-20~.focus-border i:before,
+.non-empty.effect-20~.focus-border i:after {
+  height: 100%;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.effect-20~label {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: left;
+  position: absolute;
+  left: 20px;
+  width: 100%;
+  top: 50%;
+  color: #aaa;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  z-index: -1;
+  letter-spacing: 0.5px;
+}
+
+.effect-20:focus~label,
+.non-empty.effect-20~label {
+  top: -18px;
+  left: 0;
+  font-size: 12px;
+  color: #3399ff;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+/* END SOURCE */
+#login-container input:not([type="submit"]):focus+label {
+  color: blue;
+}
+
+#login-container .input-submit-container input[type="submit"] {
+  -webkit-box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  background: #6dd5ed;
+  margin: 0;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  right: 0;
+}
+
+#login-container .input-submit-container a {
+  margin: 20px 20px 0 0;
+  position: absolute;
+  right: 0;
+}
+
+#login-container input[type="submit"]:hover {
+  background: #8ffd9f;
+}
+
+#login-container #recover {
+  position: relative;
+  top: -20px;
+  right: 0;
+}
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0;
+  }
+
+  100%: {
+    opacity: 1;
+  }
+}

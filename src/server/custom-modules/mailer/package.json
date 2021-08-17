@@ -1,0 +1,11 @@
+{
+  "name": "mailer",
+  "version": "1.0.0",
+  "description": "Custom module for emailing in Crosstalk.",
+  "main": "mailer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Christopher",
+  "license": "UNLICENSED"
+}

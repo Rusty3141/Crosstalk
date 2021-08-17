@@ -1,0 +1,1 @@
+SELECT CONCAT(ROUND((SELECT COUNT(*) FROM Message WHERE GroupID = "1" AND MessageString LIKE "✓%") / (SELECT COUNT(*) FROM Message WHERE GroupID = "1") * 100, 1), '%') AS CompletedPercentage;

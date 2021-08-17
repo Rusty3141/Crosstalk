@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- Work Sans Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="css/data.css" media="screen" />
+
+  <title>Group Info</title>
+</head>
+
+<body>
+  <div id="landing-container">
+    <div id="data-container">
+      <h1 class="title trim-inputted"></h1>
+
+      <div id="stats-container">
+        <div id="numbers">
+          <div id="users">
+            <h3 id="users-title" class="title">Users</h3>
+            <h2 id="users-readout"></h2>
+          </div>
+
+          <div id="online-users">
+            <h3 id="online-users-title" class="title">Online Users</h3>
+            <h2 id="online-users-readout"></h2>
+          </div>
+
+          <div id="messages-sent">
+            <h3 id="messages-sent-title" class="title">Messages Sent (All Time)</h3>
+            <h2 id="messages-sent-readout"></h2>
+          </div>
+        </div>
+
+        <div id="chart-container">
+          <canvas id="messages-over-time-chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <script src="js/data-client.js"></script>
+
+  <script src="../particles/ErrorParticlesLoader.js"></script>
+</body>
+
+</html>

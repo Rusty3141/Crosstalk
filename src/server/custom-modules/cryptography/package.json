@@ -1,0 +1,11 @@
+{
+  "name": "cryptography",
+  "version": "1.0.0",
+  "description": "Custom module for cryptography in Crosstalk.",
+  "main": "cryptography.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Christopher",
+  "license": "UNLICENSED"
+}

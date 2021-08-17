@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+  <meta name="apple-mobile-web-app-title" content="Crosstalk" />
+  <meta name="application-name" content="Crosstalk" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Work Sans Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="css/chat.css" media="screen" />
+
+  <title>Crosstalk</title>
+</head>
+
+<body>
+  <div id="group-create-container" class="overlay blur-exclude">
+    <div class="popup-container">
+      <button id="group-create-close-button" class="popup-close-button"></button>
+      <h1>Create a new group</h1>
+
+      <p style="text-align: center;">Let's get started. Then your friends or team members can join with the invite code, available in the group settings page.</p>
+
+      <form id="group-create-form" action="" method="POST">
+        <div class="input-field-container">
+          <input class="effect-20" type="text" autocomplete="off" name="group" placeholder="" maxlength="70" required />
+          <label>Group Name</label>
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div>
+
+        <div class="input-submit-container">
+          <input id="group-create-button" type="submit" name="create" value="Create" style="cursor: pointer;" required />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="member-list-container" class="overlay blur-exclude">
+    <div id="member-list-popup" class="popup-container">
+      <button id="member-list-close-button" class="popup-close-button"></button>
+      <h1 id="member-list-title" class="trim-inputted"></h1>
+
+      <p style="text-align: center;">A list of all members in the group. You can also start a private messaging conversation from here by sending any user a friend request.</p>
+
+      <div id="members-scrollbox">
+        <ul id="member-list">
+          <li class="title">Owner</li>
+          <ul id="owner" class="member-section"></ul>
+
+          <li class="title">Admins</li>
+          <ul id="admins" class="member-section"></ul>
+
+          <li class="title">Members</li>
+          <ul id="members" class="member-section"></ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="tag-set-container" class="overlay blur-exclude">
+    <div id="tag-set-popup" class="popup-container">
+      <button id="tag-set-close-button" class="popup-close-button"></button>
+      <h1 id="tag-set-title" class="trim-inputted"></h1>
+
+      <p style="text-align: center;">Set a custom tag to filter your groups by. You can also assign a personal colour here, or leave it as it is.</p>
+
+      <form id="tag-set-form" action="" method="POST">
+        <div class="input-field-container">
+          <input class="effect-20" type="text" autocomplete="off" name="tag" placeholder="" maxlength="14" required />
+          <label>Tag</label>
+          <span class="focus-border">
+            <i></i>
+          </span>
+        </div><br />
+
+        <input type="color" name="colour" style="cursor: pointer; margin-bottom: 50px; padding: 5px; height: 50px; box-sizing: border-box;" value="#6dd5ed" required><label for="color" style="float: right; height: 50px; line-height: 50px;">Group
+          Colour</label></input><br />
+
+        <div class="input-submit-container">
+          <input id="tag-set-submit-button" type="submit" name="set" value="Set Tag" style="cursor: pointer;" required />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="leave-container" class="overlay blur-exclude">
+    <div id="leave-popup" class="popup-container">
+      <button id="leave-close-button" class="popup-close-button"></button>
+      <h1 id="leave-title">Are you sure?</h1>
+
+      <div id="leave-info-container">
+        <p id="leave-name" class="trim-inputted" style="text-align: center;"></p>
+      </div>
+
+      <form id="leave-form" action="" method="POST">
+        <div class="input-submit-container">
+          <input id="leave-group-button" type="submit" name="set" value="Yes, leave" style="cursor: pointer; padding: 0 25px;" required />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="unfriend-container" class="overlay blur-exclude">
+    <div id="unfriend-popup" class="popup-container">
+      <button id="unfriend-close-button" class="popup-close-button"></button>
+      <h1 id="unfriend-title">Are you sure?</h1>
+
+      <div id="unfriend-info-container">
+        <p id="unfriend-name" style="text-align: center;"></p>
+      </div>
+
+      <form id="unfriend-form" action="" method="POST">
+        <select name="unfriend-type" id="unfriend-type-select">
+          <option value="block">Don't allow them to send me a request ever again (block).</option>
+          <option value="remove">Allow them to send me a request in the future.</option>
+        </select>
+
+        <div class="input-submit-container">
+          <input id="unfriend-button" type="submit" name="set" value="Yes, unfriend" style="cursor: pointer; padding: 0 25px;" required />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="server-container">
+    <div id="chat-type-toggle-container">
+      <label class="toggle-box">
+        <!-- Wrap in a label so a click toggles the checkbox -->
+        <p style="position: absolute; left: 0; padding: 5px;">Groups</p>
+        <input id="chat-type-toggle" type="checkbox" />
+        <span id="chat-type-toggle-slider-visual"></span>
+        <p style="position: absolute; right: 0; padding: 5px; z-index: -1;">Friends</p>
+      </label>
+    </div>
+    <div id="friend-requests-container">
+      <button id="friend-requests-toggle" type="button" value="Friend Requests">
+        <img src="img/ExpansionLo.png" alt="Expand" style="vertical-align: middle; height: 1em; width: 1em; margin-top: -2px; margin-right: 10px;" />
+        Friend Requests
+        <img id="alert" class="bounce" src="img/AlertLo.png" alt="New Requests" />
+      </button>
+
+      <div id="friend-requests" class="slide-back"></div>
+    </div>
+    <div id="server-buttons-container">
+      <button id="group-join" class="group-action-button" type="button" value="Join">Join Group</button>
+
+      <button id="group-create" class="group-action-button" type="button" value="Create">Create Group</button>
+
+      <form id="group-join-form" class="input-fadein" action="">
+        <div class="slide-back">
+          <div class="input-field-container">
+            <input id="group-join-code" class="effect-20" type="text" name="code" autocomplete="off" pattern=".{12}" title="Invite code must be 12 characters." placeholder="Invite Code" />
+            <span class="focus-border">
+              <i></i>
+            </span>
+          </div>
+
+          <button id="group-join-button" type="submit" form="group-join-form" value="Go">Go</button>
+        </div>
+      </form>
+
+      <input type="text" id="tags-search" autocomplete="off" placeholder="Filter tags..." />
+    </div>
+
+    <div id="group-prompt-container">
+      <p id="group-prompt">No groups yet. Join or create one.</p>
+    </div>
+
+    <div id="server-selector"></div>
+  </div>
+
+  <div id="info-container">
+    <h1 id="server-name-display" class="title">Crosstalk</h1>
+    <div id="info-buttons-container">
+      <button class="requires-group-selection" id="options-button" type="button" value="Options"><img src="img/Cog.png" alt="Options" /></button>
+      <button id="profile-options-button" type="button" value="Profile"><img src="img/Person.png" alt="Profile" /></button>
+    </div>
+    <p id="name-display" class="title">User</p>
+  </div>
+
+  <div id="profile-options-nav-container" class="options-box">
+    <div class="arrow-up"></div>
+    <ul id="profile-options">
+      <li>
+        <p id="profile-options-name-label"></p>
+      </li>
+      <li><a href="/account/change-password">Change Password</a></li>
+      <li class="round-bottom"><a href="/logout">Log Out</a></li>
+    </ul>
+  </div>
+
+  <div id="options-nav-container" class="options-box">
+    <div class="arrow-up"></div>
+    <ul id="options">
+      <li>
+        <p id="group-options-label"></p>
+      </li>
+      <li><input type="text" id="search" autocomplete="off" placeholder="Search messages..." /></li>
+      <li style="padding: 0 !important;">
+        <div id="message-type-toggle-container">
+          <label class="toggle-box">
+            <!-- Wrap in a label so a click toggles the checkbox -->
+            <p style="position: absolute; left: 0; padding: 5px;">All</p>
+            <input id="message-type-toggle" type="checkbox" />
+            <span id="message-type-toggle-slider-visual"></span>
+            <p style="position: absolute; right: 0; padding: 5px; z-index: 1;">Files</p>
+          </label>
+        </div>
+      </li>
+      <li><button id="view-members" style="cursor: pointer; background: none; border: none; outline: none;">View members</button></li>
+      <li><a id="show-invite-code">Get invite code</a></li>
+      <li id="invite-code-display">
+        <div id="invite-code-container">
+          <p id="invite-code"></p>
+          <button id="invite-code-copy" value="Copy">Copy</button>
+        </div>
+      </li>
+      <li id="group-info-admin-button-item" style="display: none;"><button id="group-info-admin-button" style="cursor: pointer; background: none; border: none; outline: none;">View group info</button></li>
+    </ul>
+  </div>
+
+  <div id="chat-container">
+    <p id="chatbox-reminder"></p>
+    <p id="invite-prompt">Click the <img src="img/Cog.png" alt="Options" style="vertical-align: middle; height: 1em; width: 1em;" /> button to get a code to invite your friends or team members.</p>
+    <div id="pinned-message-container">
+      <button id="pinned-message-delete-button"></button>
+      <p id="pinned-message-label"></p>
+      <div id="pinned-message">
+        <p id="pinned-message-text"></p>
+      </div>
+    </div>
+    <ul id="chatbox"></ul>
+    <form id="message-form" action="">
+      <div class="input-field-container">
+        <input type="text" id="message" class="effect-20" autocomplete="off" maxlength="2000" placeholder="Type a message..." />
+        <span class="focus-border">
+          <i></i>
+        </span>
+
+        <div style="position: relative; right: 0;">
+          <!-- Allow PNG, JPEG, PDF, TXT files only. -->
+          <input type="file" id="file-input" name="file" accept="image/x-png, image/jpeg, application/pdf" hidden />
+          <label for="file-input"></label>
+          <div id="file-info" class="blur-exclude">
+            <button id="remove-file-button" type="button"></button>
+            <div id="file-chosen">
+              <span class="name"></span>
+              <span class="extension"></span>
+              </p>
+            </div>
+
+            <button id="message-send-tick" type="submit" form="message-form" value="Submit"><img src="img/TickLo.png" alt="Send" /></button>
+
+          </div>
+        </div>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles/ChatBarParticlesLoader.js"></script>
+
+  <script src="js/options-buttons.js"></script>
+
+  <script src="js/group-manager.js"></script>
+  <script src="js/friend-manager.js"></script>
+
+  <script src="js/file-handler.js"></script>
+
+  <!-- Automatically served by the API, if we are listening correctly. -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/socket.io-stream.js"></script>
+
+  <script src="js/Message.js"></script>
+  <script src="js/chat-client.js"></script>
+  <script src="js/empty-input.js"></script>
+</body>
+
+</html>
